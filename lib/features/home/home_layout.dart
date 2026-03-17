@@ -1,3 +1,6 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flights_app/features/favorites/view_model/favorites_cubit.dart';
+import 'package:flights_app/features/favorites/view_model/favorites_state.dart';
 import 'package:flights_app/core/colors/appcolors.dart';
 import 'package:flights_app/core/images/imagespathes.dart';
 import 'package:flights_app/core/texts/textstyle.dart';
@@ -10,77 +13,6 @@ class HomeLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFFF5F7FA),
-      // bottomNavigationBar: BottomNavigationBar(
-      //   backgroundColor: Colors.white,
-      //   type: BottomNavigationBarType.fixed,
-      //   elevation: 10,
-      //   currentIndex: 0,
-      //   selectedItemColor: AppColors.primaryBlue,
-      //   unselectedItemColor: Colors.grey.shade500,
-      //   selectedLabelStyle:  TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
-      //   unselectedLabelStyle:  TextStyle(fontWeight: FontWeight.normal, fontSize: 12),
-      //   onTap: (index) {
-      //   },
-      //   items: [
-      //     BottomNavigationBarItem(
-      //       icon: Padding(
-      //         padding: EdgeInsets.only(bottom: 4.0),
-      //         child: SvgPicture.asset(
-      //           ImagePaths.home,
-      //           width: 16,
-      //           height: 16,
-      //           colorFilter: ColorFilter.mode(
-      //             Colors.grey.shade500,
-      //             BlendMode.srcIn,
-      //           ),
-      //         ),
-      //       ),
-      //       activeIcon: Padding(
-      //         padding: EdgeInsets.only(bottom: 4.0),
-      //         child: SvgPicture.asset(
-      //           ImagePaths.home,
-      //           width: 24,
-      //           height: 24,
-      //           colorFilter: ColorFilter.mode(
-      //             AppColors.primaryBlue,
-      //             BlendMode.srcIn,
-      //           ),
-      //         ),
-      //       ),
-      //       label: 'Home',
-      //     ),
-      //     BottomNavigationBarItem(
-      //       icon: Padding(
-      //         padding:  EdgeInsets.only(bottom: 4.0),
-      //         child: SvgPicture.asset(
-      //           ImagePaths.booked,
-      //           width: 20,
-      //           height: 16,
-      //           colorFilter: ColorFilter.mode(
-      //             Colors.grey.shade500,
-      //             BlendMode.srcIn,
-      //           ),
-      //         ),
-      //       ),
-      //       label: 'Booked',
-      //     ),
-      //     BottomNavigationBarItem(
-      //       icon: Padding(
-      //         padding:  EdgeInsets.only(bottom: 4.0),
-      //         child: SvgPicture.asset(
-      //           ImagePaths.person,
-      //           width: 16,
-      //           height: 16,
-      //           colorFilter: ColorFilter.mode(
-      //             Colors.grey.shade500,
-      //             BlendMode.srcIn,
-      //           ),
-      //         ),
-      //       ),
-      //       label: 'Profile',
-      //     ),
-      //   ],
-      // ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
@@ -219,17 +151,29 @@ class HomeLayout extends StatelessWidget {
                                 Positioned(
                                   top: 12,
                                   right: 12,
-                                  child: Container(
-                                    padding:  EdgeInsets.all(8),
-                                    decoration: BoxDecoration(
-                                      color: Colors.white.withOpacity(0.6),
-                                      shape: BoxShape.circle,
-                                    ),
-                                    child:  Icon(
-                                      Icons.favorite_border,
-                                      color: Colors.redAccent,
-                                      size: 20,
-                                    ),
+                                  child: BlocBuilder<FavoritesCubit, FavoritesState>(
+                                    builder: (context, state) {
+                                      var cubit = context.read<FavoritesCubit>();
+                                      String flightId = "paris_london_01";
+                                      bool isFav = cubit.isFavorite(flightId);
+                                      return GestureDetector(
+                                        onTap: () {
+                                          cubit.toggleFavorite(flightId);
+                                        },
+                                        child: Container(
+                                          padding:  EdgeInsets.all(8),
+                                          decoration: BoxDecoration(
+                                            color: Colors.white.withOpacity(0.6),
+                                            shape: BoxShape.circle,
+                                          ),
+                                          child: Icon(
+                                            isFav ? Icons.favorite : Icons.favorite_border,
+                                            color: isFav ? Colors.redAccent : Colors.grey,
+                                            size: 20,
+                                          ),
+                                        ),
+                                      );
+                                    },
                                   ),
                                 ),
                               ],
@@ -286,13 +230,29 @@ class HomeLayout extends StatelessWidget {
                                 Positioned(
                                   top: 12,
                                   right: 12,
-                                  child: Container(
-                                    padding: EdgeInsets.all(8),
-                                    decoration: BoxDecoration(
-                                      color: Colors.white.withOpacity(0.6),
-                                      shape: BoxShape.circle,
-                                    ),
-                                    child: Icon(Icons.favorite_border, color: Colors.red, size: 20),
+                                  child: BlocBuilder<FavoritesCubit, FavoritesState>(
+                                    builder: (context, state) {
+                                      var cubit = context.read<FavoritesCubit>();
+                                      String flightId = "london_newyork_02";
+                                      bool isFav = cubit.isFavorite(flightId);
+                                      return GestureDetector(
+                                        onTap: () {
+                                          cubit.toggleFavorite(flightId);
+                                        },
+                                        child: Container(
+                                          padding: EdgeInsets.all(8),
+                                          decoration: BoxDecoration(
+                                            color: Colors.white.withOpacity(0.6),
+                                            shape: BoxShape.circle,
+                                          ),
+                                          child: Icon(
+                                            isFav ? Icons.favorite : Icons.favorite_border,
+                                            color: isFav ? Colors.redAccent : Colors.grey,
+                                            size: 20,
+                                          ),
+                                        ),
+                                      );
+                                    },
                                   ),
                                 ),
                               ],

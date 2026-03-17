@@ -3,8 +3,11 @@ import 'package:flights_app/core/images/imagespathes.dart';
 import 'package:flights_app/core/texts/textstyle.dart';
 import 'package:flights_app/core/widgets/feature_item.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../view_model/booking_cubit.dart';
 
 class FlightInformation extends StatelessWidget {
 
@@ -337,7 +340,21 @@ class FlightInformation extends StatelessWidget {
                   ),
                   SizedBox(height: 16),
                   InkWell(
-                    onTap: () {},
+                    onTap: () { Map<String, dynamic> myFlight = {
+                      'airlineName': 'British Airways',
+                      'departureCity': 'Paris',
+                      'arrivalCity': 'London',
+                      'date': 'Jun 24, 2024',
+                      'price': '\$150',
+                    };
+                    context.read<BookingCubit>().bookFlight(myFlight);
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Flight Booked Successfully!'),
+                        backgroundColor: Colors.green,
+                      ),
+                    );
+                    },
                     child: Container(
                       width: double.infinity,
                       padding: EdgeInsets.symmetric(vertical: 14),

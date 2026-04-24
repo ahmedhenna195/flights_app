@@ -1,7 +1,7 @@
 import 'package:flights_app/core/colors/appcolors.dart';
 import 'package:flights_app/core/images/imagespathes.dart';
 import 'package:flights_app/features/booking/view/mybookings.dart';
-import 'package:flights_app/features/home/home_layout.dart';
+import 'package:flights_app/features/home/pages/home_layout.dart';
 import 'package:flights_app/features/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';

@@ -1,12 +1,14 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flights_app/features/favorites/view_model/favorites_cubit.dart';
-import 'package:flights_app/features/favorites/view_model/favorites_state.dart';
 import 'package:flights_app/core/colors/appcolors.dart';
 import 'package:flights_app/core/images/imagespathes.dart';
 import 'package:flights_app/core/texts/textstyle.dart';
 import 'package:flights_app/core/widgets/flight_ticket_card.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flights_app/features/home/view_model/home_flights_cubit.dart';
+import 'package:flights_app/features/home/view_model/home_flights_state.dart';
+import 'package:flights_app/features/favorites/view_model/favorites_cubit.dart';
+import 'package:flights_app/features/favorites/view_model/favorites_state.dart';
+import 'package:flights_app/features/booking/view_model/booking_cubit.dart';
 
 class HomeLayout extends StatelessWidget {
   @override
@@ -19,18 +21,18 @@ class HomeLayout extends StatelessWidget {
           Container(
             width: double.infinity,
             color: AppColors.primaryBlue,
-            padding:  EdgeInsets.only(top: 32, left: 24, right: 24, bottom: 24),
+            padding: EdgeInsets.only(top: 32, left: 24, right: 24, bottom: 24),
             child: Row(
               children: [
                 Container(
                   width: 50,
                   height: 50,
-                  decoration:  BoxDecoration(
+                  decoration: BoxDecoration(
                     color: Colors.white,
                     shape: BoxShape.circle,
                   ),
                 ),
-                 SizedBox(width: 16),
+                SizedBox(width: 16),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -49,9 +51,9 @@ class HomeLayout extends StatelessWidget {
               ],
             ),
           ),
-           SizedBox(height: 24),
+          SizedBox(height: 24),
           Padding(
-            padding:  EdgeInsets.symmetric(horizontal: 24),
+            padding: EdgeInsets.symmetric(horizontal: 24),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -82,11 +84,11 @@ class HomeLayout extends StatelessWidget {
                         ),
                       ),
                     ),
-                     SizedBox(width: 12),
+                    SizedBox(width: 12),
                     Container(
                       width: 56,
                       height: 56,
-                      decoration:  BoxDecoration(
+                      decoration: BoxDecoration(
                         color: AppColors.primaryBlue,
                         shape: BoxShape.circle,
                       ),
@@ -97,26 +99,19 @@ class HomeLayout extends StatelessWidget {
                     ),
                   ],
                 ),
-                 SizedBox(height: 24),
+                SizedBox(height: 24),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      'Favorite Flights',
-                      style: AppTextStyles.font18MediumBlack,
-                    ),
-                    Text(
-                      'See all',
-                      style: AppTextStyles.font14MediumBlue,
-                    ),
+                    Text('Favorite Flights', style: AppTextStyles.font18MediumBlack),
+                    Text('See all', style: AppTextStyles.font14MediumBlue),
                   ],
                 ),
-                 SizedBox(height: 16),
+                SizedBox(height: 16),
                 SizedBox(
                   height: 230,
                   child: ListView(
                     scrollDirection: Axis.horizontal,
-                    padding: EdgeInsets.zero,
                     children: [
                       Container(
                         width: 280,
@@ -127,7 +122,7 @@ class HomeLayout extends StatelessWidget {
                             BoxShadow(
                               color: Colors.black.withOpacity(0.05),
                               blurRadius: 10,
-                              offset:  Offset(0, 4),
+                              offset: Offset(0, 4),
                             ),
                           ],
                         ),
@@ -161,7 +156,7 @@ class HomeLayout extends StatelessWidget {
                                           cubit.toggleFavorite(flightId);
                                         },
                                         child: Container(
-                                          padding:  EdgeInsets.all(8),
+                                          padding: EdgeInsets.all(8),
                                           decoration: BoxDecoration(
                                             color: Colors.white.withOpacity(0.6),
                                             shape: BoxShape.circle,
@@ -190,7 +185,7 @@ class HomeLayout extends StatelessWidget {
                                       Text('\$150', style: AppTextStyles.font16BoldBlue),
                                     ],
                                   ),
-                                   SizedBox(height: 8),
+                                  SizedBox(height: 8),
                                   Text('Direct • 1h 20m', style: AppTextStyles.font12MediumGray),
                                 ],
                               ),
@@ -198,7 +193,7 @@ class HomeLayout extends StatelessWidget {
                           ],
                         ),
                       ),
-                       SizedBox(width: 16),
+                      SizedBox(width: 16),
                       Container(
                         width: 280,
                         decoration: BoxDecoration(
@@ -208,7 +203,7 @@ class HomeLayout extends StatelessWidget {
                             BoxShadow(
                               color: Colors.black.withOpacity(0.05),
                               blurRadius: 10,
-                              offset:  Offset(0, 4),
+                              offset: Offset(0, 4),
                             ),
                           ],
                         ),
@@ -218,13 +213,15 @@ class HomeLayout extends StatelessWidget {
                             Stack(
                               children: [
                                 ClipRRect(
-                                  borderRadius:  BorderRadius.only(
+                                  borderRadius: BorderRadius.only(
                                     topLeft: Radius.circular(20),
                                     topRight: Radius.circular(20),
                                   ),
                                   child: Image(
                                     image: AssetImage(ImagePaths.london),
-                                    height: 144, width: 278, fit: BoxFit.cover,
+                                    height: 144,
+                                    width: 278,
+                                    fit: BoxFit.cover,
                                   ),
                                 ),
                                 Positioned(
@@ -281,76 +278,71 @@ class HomeLayout extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 40),
-                Text(
-                  'Discover Flights',
-                  style: AppTextStyles.font18MediumBlack,
-                ),
-                 SizedBox(height: 16),
+                Text('Discover Flights', style: AppTextStyles.font18MediumBlack),
+                SizedBox(height: 16),
               ],
             ),
           ),
           Expanded(
-            child: ListView(
-              padding:  EdgeInsets.symmetric(horizontal: 24),
-              children: [
-                FlightTicketCard(
-                  logoBgColor: Colors.red.shade50,
-                  airlineLogo: ImagePaths.redFlight,
-                  airlineName: 'British Airways',
-                  flightClass: 'Economy Class',
-                  classBgColor: Colors.blue.shade50,
-                  classTextColor: Colors.blue.shade700,
-                  departureCode: 'CDG',
-                  departureCity: 'Paris',
-                  departureTime: '10:10',
-                  arrivalCode: 'LHR',
-                  arrivalCity: 'London',
-                  arrivalTime: '10:40',
-                  duration: '90 min',
-                  stopType: 'Non-stop',
-                  date: 'Jun 24, 2024',
-                  price: '\$150',
-                ),
-                SizedBox(height: 16),
-                FlightTicketCard(
-                  logoBgColor: Colors.blue.shade50,
-                  airlineLogo: ImagePaths.blueFlight,
-                  airlineName: 'Air France',
-                  flightClass: 'Business Class',
-                  classBgColor: Colors.orange.shade50,
-                  classTextColor: Colors.orange.shade700,
-                  departureCode: 'HND',
-                  departureCity: 'Tokyo',
-                  departureTime: '08:00',
-                  arrivalCode: 'CDG',
-                  arrivalCity: 'Paris',
-                  arrivalTime: '20:45',
-                  duration: '12h 45m',
-                  stopType: 'Non-stop',
-                  date: 'Jun 24, 2024',
-                  price: '\$150',
-                ),
-                 SizedBox(height: 16),
-                FlightTicketCard(
-                  airlineLogo: ImagePaths.redFlight,
-                  logoBgColor:  Color(0xFFFFF0F0),
-                  airlineName: 'British Airways',
-                  flightClass: 'ECONOMY CLASS',
-                  classBgColor: Colors.blue.shade50,
-                  classTextColor: Colors.blue.shade700,
-                  departureCode: 'CDG',
-                  departureCity: 'Paris',
-                  departureTime: '10:10',
-                  arrivalCode: 'LHR',
-                  arrivalCity: 'London',
-                  arrivalTime: '10:40',
-                  duration: '90 min',
-                  stopType: 'Non-stop',
-                  date: 'Jun 24, 2024',
-                  price: '\$150',
-                ),
-
-              ],
+            child: BlocBuilder<HomeFlightsCubit, HomeFlightsState>(
+              builder: (context, state) {
+                if (state is HomeFlightsLoading) {
+                  return Center(child: CircularProgressIndicator(color: AppColors.primaryBlue));
+                } else if (state is HomeFlightsError) {
+                  return Center(child: Text(state.message, style: TextStyle(color: Colors.red)));
+                } else if (state is HomeFlightsLoaded) {
+                  if (state.flights.isEmpty) {
+                    return Center(child: Text("No flights available."));
+                  }
+                  return ListView.separated(
+                    padding: EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+                    itemCount: state.flights.length,
+                    separatorBuilder: (context, index) => SizedBox(height: 16),
+                    itemBuilder: (context, index) {
+                      final flight = state.flights[index];
+                      return InkWell(
+                        borderRadius: BorderRadius.circular(24),
+                        onTap: () {
+                          Map<String, dynamic> flightToBook = {
+                            'airlineName': flight.airlineName,
+                            'departureCity': 'Paris',
+                            'arrivalCity': 'London',
+                            'date': 'Jun 24, 2026',
+                            'price': flight.price,
+                          };
+                          context.read<BookingCubit>().bookFlight(flightToBook);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Flight Booked Successfully! Check Booked Tab.'),
+                              backgroundColor: Colors.green,
+                              duration: Duration(seconds: 2),
+                            ),
+                          );
+                        },
+                        child: FlightTicketCard(
+                          airlineLogo: ImagePaths.redFlight,
+                          logoBgColor: Colors.red.shade50,
+                          airlineName: flight.airlineName,
+                          flightClass: 'Economy Class',
+                          classBgColor: Colors.blue.shade50,
+                          classTextColor: Colors.blue.shade700,
+                          departureCode: flight.departureCode,
+                          departureCity: 'Paris',
+                          departureTime: flight.departureTime,
+                          arrivalCode: flight.arrivalCode,
+                          arrivalCity: 'London',
+                          arrivalTime: flight.arrivalTime,
+                          duration: flight.duration,
+                          stopType: 'Non-stop',
+                          date: 'Jun 24, 2026',
+                          price: flight.price,
+                        ),
+                      );
+                    },
+                  );
+                }
+                return SizedBox();
+              },
             ),
           ),
         ],

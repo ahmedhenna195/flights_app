@@ -2,7 +2,7 @@ import 'package:flights_app/core/colors/appcolors.dart';
 import 'package:flights_app/core/images/imagespathes.dart';
 import 'package:flights_app/core/texts/textstyle.dart';
 import 'package:flights_app/core/widgets/appwidgets.dart';
-import 'package:flights_app/features/home/home_layout.dart';
+import 'package:flights_app/features/home/pages/home_layout.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';

@@ -5,7 +5,7 @@ import 'package:flights_app/core/widgets/appwidgets.dart';
 import 'package:flights_app/features/auth/view/signupscreen.dart';
 import 'package:flights_app/features/auth/view_model/auth_cubit.dart';
 import 'package:flights_app/features/auth/view_model/auth_state.dart';
-import 'package:flights_app/features/home/home_layout.dart';
+import 'package:flights_app/features/home/pages/home_layout.dart';
 import 'package:flights_app/features/layout/view/main_layout_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
